@@ -1,10 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 type FieldType = 'input' | 'select' | 'checkbox';
 
 interface Field {
   id: string;
   type: FieldType;
+  label: string;
 }
 
 interface FormState {
@@ -19,10 +20,13 @@ const formSlice = createSlice({
   name: 'form',
   initialState,
   reducers: {
-    addField: (state, action) => {
+    addField: (state, action: PayloadAction<FieldType>) => {
+      const fieldType = action.payload;
+
       state.fields.push({
-        id: Date.now().toString(),
-        type: action.payload,
+        id: crypto.randomUUID(),
+        type: fieldType,
+        label: `${fieldType} field`,
       });
     },
   },
