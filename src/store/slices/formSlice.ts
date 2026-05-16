@@ -29,8 +29,11 @@ const formSlice = createSlice({
         label: `${fieldType} field`,
       });
     },
+    removeField: (state, action: PayloadAction<string>) => {
+      state.fields = state.fields.filter((el) => el.id !== action.payload);
+    }
   },
 });
 
-export const { addField } = formSlice.actions;
+export const { addField, removeField } = formSlice.actions;
 export default formSlice.reducer;
