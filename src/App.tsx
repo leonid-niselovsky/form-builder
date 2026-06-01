@@ -1,10 +1,10 @@
 import './App.css';
-import { Button, Checkbox, Flex, Input, Layout, Select, Space, Tooltip, Typography } from 'antd';
-import { useAppDispatch, useAppSelector } from './store/hook.ts';
-import { addField, removeField } from './store/slices/formSlice.ts';
+import { Button, Flex, Layout, Space, Typography } from 'antd';
+import FormFieldItem from './components/FormFieldItem';
+import { useAppDispatch, useAppSelector } from './store/hook';
+import { addField } from './store/slices/formSlice';
 const { Sider, Content } = Layout;
 const { Title } = Typography;
-import { DeleteOutlined } from '@ant-design/icons';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -34,28 +34,7 @@ function App() {
 
         <Space direction="vertical" style={{ width: '100%' }} size="middle">
           {fields.map((field) => (
-            <Flex key={field.id} gap={8} align="center" justify={"space-between"}>
-              {field.type === 'input' && <Input placeholder={field.label} />}
-              {field.type === 'select' && (
-                <Select
-                  placeholder={field.label}
-                  options={[
-                    { value: 'option-1', label: 'Option 1' },
-                    { value: 'option-2', label: 'Option 2' },
-                  ]}
-                />
-              )}
-              {field.type === 'checkbox' && <Checkbox>{field.label}</Checkbox>}
-
-              <Tooltip title="Remove field">
-                <Button
-                  danger
-                  icon={<DeleteOutlined />}
-                  onClick={() => dispatch(removeField(field.id))}
-                />
-              </Tooltip>
-
-            </Flex>
+            <FormFieldItem key={field.id} field={field} />
           ))}
         </Space>
       </Content>

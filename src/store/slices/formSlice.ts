@@ -2,7 +2,7 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 type FieldType = 'input' | 'select' | 'checkbox';
 
-interface Field {
+export interface Field {
   id: string;
   type: FieldType;
   label: string;
@@ -31,7 +31,7 @@ const formSlice = createSlice({
     },
     removeField: (state, action: PayloadAction<string>) => {
       state.fields = state.fields.filter((el) => el.id !== action.payload);
-    }
+    },
   },
 });
 
