@@ -1,7 +1,7 @@
 import './App.css';
 import { Button, Flex, Layout, Space, Typography } from 'antd';
 import FormFieldItem from './components/FormFieldItem';
-import { useAppDispatch, useAppSelector } from './store/hook';
+import { useAppDispatch, useAppSelector } from './store/hooks';
 import { addField } from './store/slices/formSlice';
 const { Sider, Content } = Layout;
 const { Title } = Typography;

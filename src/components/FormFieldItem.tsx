@@ -1,7 +1,7 @@
 import { DeleteOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Flex, Input, Select, Tooltip } from 'antd';
-import { useAppDispatch } from '../store/hook';
-import { removeField, type Field } from '../store/slices/formSlice';
+import { Button, Checkbox, Flex, Input, Select, Space, Tooltip } from 'antd';
+import { useAppDispatch } from '../store/hooks';
+import { removeField, updateFieldLabel, type Field } from '../store/slices/formSlice';
 
 interface FormFieldItemProps {
   field: Field;
@@ -11,11 +11,37 @@ function FormFieldItem({ field }: FormFieldItemProps) {
   const dispatch = useAppDispatch();
 
   return (
-    <Flex gap={8} align="center">
-      {field.type === 'input' && <Input style={{ flex: 1 }} placeholder={field.label} />}
+    <Space direction="vertical" style={{ width: '100%' }}>
+      <Flex gap={8} align="center">
+        <Input
+          style={{ flex: 1 }}
+          value={field.label}
+          placeholder="Field label"
+          onChange={(e) => {
+            dispatch(
+              updateFieldLabel({
+                id: field.id,
+                label: e.target.value,
+              })
+            );
+          }}
+        />
+
+        <Tooltip title="Remove field">
+          <Button
+            danger
+            icon={<DeleteOutlined />}
+            onClick={() => dispatch(removeField(field.id))}
+          />
+        </Tooltip>
+      </Flex>
+
+      {field.type === 'input' && (
+        <Input style={{ width: '100%' }} placeholder={field.label} />
+      )}
       {field.type === 'select' && (
         <Select
-          style={{ flex: 1 }}
+          style={{ width: '100%' }}
           placeholder={field.label}
           options={[
             { value: 'option-1', label: 'Option 1' },
@@ -23,16 +49,8 @@ function FormFieldItem({ field }: FormFieldItemProps) {
           ]}
         />
       )}
-      {field.type === 'checkbox' && <Checkbox style={{ flex: 1 }}>{field.label}</Checkbox>}
-
-      <Tooltip title="Remove field">
-        <Button
-          danger
-          icon={<DeleteOutlined />}
-          onClick={() => dispatch(removeField(field.id))}
-        />
-      </Tooltip>
-    </Flex>
+      {field.type === 'checkbox' && <Checkbox>{field.label}</Checkbox>}
+    </Space>
   );
 }
 
