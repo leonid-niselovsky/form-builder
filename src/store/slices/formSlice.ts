@@ -1,11 +1,14 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
-type FieldType = 'input' | 'select' | 'checkbox';
+export type FieldType = 'input' | 'select' | 'checkbox';
 
 export interface Field {
   id: string;
   type: FieldType;
   label: string;
+  placeholder?: string;
+  required: boolean;
+  options?: string[];
 }
 
 interface FormState {
@@ -32,6 +35,14 @@ const formSlice = createSlice({
         id: crypto.randomUUID(),
         type: fieldType,
         label: `${fieldType} field`,
+        placeholder:
+          fieldType === 'input'
+            ? 'Enter value'
+            : fieldType === 'select'
+              ? 'Select an option'
+              : undefined,
+        required: false,
+        options: fieldType === 'select' ? ['Option 1', 'Option 2'] : undefined,
       });
     },
     updateFieldLabel: (state, action: PayloadAction<UpdateFieldLabelPayload>) => {
