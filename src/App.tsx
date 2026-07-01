@@ -1,42 +1,27 @@
 import './App.css';
-import { Button, Flex, Layout, Space, Typography } from 'antd';
-import FormFieldItem from './components/FormFieldItem';
-import { useAppDispatch, useAppSelector } from './store/hooks';
-import { addField } from './store/slices/formSlice';
+import { Flex, Layout } from 'antd';
+import FieldPalette from './components/FieldPalette';
+import FormBuilder from './components/FormBuilder';
+import FormPreview from './components/FormPreview';
+
 const { Sider, Content } = Layout;
-const { Title } = Typography;
 
 function App() {
-  const dispatch = useAppDispatch();
-  const fields = useAppSelector((state) => state.form.fields);
-
   return (
     <Layout style={{ height: '100vh' }}>
       <Sider width={220} style={{ padding: 16, background: '#fff' }}>
-        <Space direction="vertical" style={{ width: '100%' }}>
-          <Flex justify="space-between">
-            <Button type="primary" block onClick={() => dispatch(addField('input'))}>
-              Add Input
-            </Button>
-          </Flex>
-
-          <Button block onClick={() => dispatch(addField('select'))}>
-            Add Select
-          </Button>
-          <Button block onClick={() => dispatch(addField('checkbox'))}>
-            Add Checkbox
-          </Button>
-        </Space>
+        <FieldPalette />
       </Sider>
 
       <Content style={{ padding: 24 }}>
-        <Title level={3}>Form Preview</Title>
-
-        <Space direction="vertical" style={{ width: '100%' }} size="middle">
-          {fields.map((field) => (
-            <FormFieldItem key={field.id} field={field} />
-          ))}
-        </Space>
+        <Flex gap={24} align="flex-start">
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <FormBuilder />
+          </div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <FormPreview />
+          </div>
+        </Flex>
       </Content>
     </Layout>
   );
