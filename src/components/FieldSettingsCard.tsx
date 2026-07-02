@@ -1,7 +1,13 @@
 import { DeleteOutlined } from '@ant-design/icons';
-import { Button, Card, Input, Tag, Tooltip } from 'antd';
+import { Button, Card, Input, Space, Tag, Tooltip } from 'antd';
 import { useAppDispatch } from '../store/hooks';
-import { removeField, updateFieldLabel, type Field, type FieldType } from '../store/slices/formSlice';
+import {
+  removeField,
+  updateFieldLabel,
+  updateFieldPlaceholder,
+  type Field,
+  type FieldType,
+} from '../store/slices/formSlice';
 
 interface FieldSettingsCardProps {
   field: Field;
@@ -34,18 +40,35 @@ function FieldSettingsCard({ field }: FieldSettingsCardProps) {
         </Tooltip>
       }
     >
-      <Input
-        value={field.label}
-        placeholder="Field label"
-        onChange={(e) => {
-          dispatch(
-            updateFieldLabel({
-              id: field.id,
-              label: e.target.value,
-            })
-          );
-        }}
-      />
+      <Space direction="vertical" style={{ width: '100%' }}>
+        <Input
+          value={field.label}
+          placeholder="Field label"
+          onChange={(e) => {
+            dispatch(
+              updateFieldLabel({
+                id: field.id,
+                label: e.target.value,
+              })
+            );
+          }}
+        />
+
+        {field.type !== 'checkbox' && (
+          <Input
+            value={field.placeholder}
+            placeholder="Field placeholder"
+            onChange={(e) => {
+              dispatch(
+                updateFieldPlaceholder({
+                  id: field.id,
+                  placeholder: e.target.value,
+                })
+              );
+            }}
+          />
+        )}
+      </Space>
     </Card>
   );
 }

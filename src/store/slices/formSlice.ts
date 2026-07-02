@@ -23,6 +23,11 @@ interface UpdateFieldLabelPayload {
   label: string;
 }
 
+interface UpdateFieldPlaceholderPayload {
+  id: string;
+  placeholder: string;
+}
+
 const initialState: FormState = {
   fields: [],
 };
@@ -65,11 +70,19 @@ const formSlice = createSlice({
         field.label = action.payload.label;
       }
     },
+    updateFieldPlaceholder: (state, action: PayloadAction<UpdateFieldPlaceholderPayload>) => {
+      const field = state.fields.find((el) => el.id === action.payload.id);
+
+      if (field) {
+        field.placeholder = action.payload.placeholder;
+      }
+    },
     removeField: (state, action: PayloadAction<string>) => {
       state.fields = state.fields.filter((el) => el.id !== action.payload);
     },
   },
 });
 
-export const { addField, removeField, updateFieldLabel } = formSlice.actions;
+export const { addField, removeField, updateFieldLabel, updateFieldPlaceholder } =
+  formSlice.actions;
 export default formSlice.reducer;
