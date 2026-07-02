@@ -38,6 +38,16 @@ interface UpdateFieldOptionsPayload {
   options: string[];
 }
 
+interface UpdateFieldMinPayload {
+  id: string;
+  min: number | undefined;
+}
+
+interface UpdateFieldMaxPayload {
+  id: string;
+  max: number | undefined;
+}
+
 const initialState: FormState = {
   fields: [],
 };
@@ -108,6 +118,20 @@ const formSlice = createSlice({
         field.options = action.payload.options;
       }
     },
+    updateFieldMin: (state, action: PayloadAction<UpdateFieldMinPayload>) => {
+      const field = state.fields.find((el) => el.id === action.payload.id);
+
+      if (field) {
+        field.min = action.payload.min;
+      }
+    },
+    updateFieldMax: (state, action: PayloadAction<UpdateFieldMaxPayload>) => {
+      const field = state.fields.find((el) => el.id === action.payload.id);
+
+      if (field) {
+        field.max = action.payload.max;
+      }
+    },
     removeField: (state, action: PayloadAction<string>) => {
       state.fields = state.fields.filter((el) => el.id !== action.payload);
     },
@@ -122,5 +146,7 @@ export const {
   toggleFieldRequired,
   updateFieldHelperText,
   updateFieldOptions,
+  updateFieldMin,
+  updateFieldMax,
 } = formSlice.actions;
 export default formSlice.reducer;

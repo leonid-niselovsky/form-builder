@@ -1,11 +1,24 @@
 import { DeleteOutlined } from '@ant-design/icons';
-import { Button, Card, Flex, Input, Space, Switch, Tag, Tooltip, Typography } from 'antd';
+import {
+  Button,
+  Card,
+  Flex,
+  Input,
+  InputNumber,
+  Space,
+  Switch,
+  Tag,
+  Tooltip,
+  Typography,
+} from 'antd';
 import { useAppDispatch } from '../store/hooks';
 import {
   removeField,
   toggleFieldRequired,
   updateFieldHelperText,
   updateFieldLabel,
+  updateFieldMax,
+  updateFieldMin,
   updateFieldOptions,
   updateFieldPlaceholder,
   type Field,
@@ -89,6 +102,27 @@ function FieldSettingsCard({ field }: FieldSettingsCardProps) {
               );
             }}
           />
+        )}
+
+        {field.type === 'number' && (
+          <Flex gap={8}>
+            <InputNumber
+              style={{ width: '100%' }}
+              value={field.min}
+              placeholder="Min"
+              onChange={(value) =>
+                dispatch(updateFieldMin({ id: field.id, min: value ?? undefined }))
+              }
+            />
+            <InputNumber
+              style={{ width: '100%' }}
+              value={field.max}
+              placeholder="Max"
+              onChange={(value) =>
+                dispatch(updateFieldMax({ id: field.id, max: value ?? undefined }))
+              }
+            />
+          </Flex>
         )}
 
         <Input
