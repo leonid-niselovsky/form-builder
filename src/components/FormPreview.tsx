@@ -1,5 +1,6 @@
-import { Checkbox, Input, Select, Space, Typography } from 'antd';
+import { Form, Typography } from 'antd';
 import { useAppSelector } from '../store/hooks';
+import PreviewField from './PreviewField';
 
 const { Title } = Typography;
 
@@ -10,29 +11,11 @@ function FormPreview() {
     <section>
       <Title level={3}>Form Preview</Title>
 
-      <Space direction="vertical" style={{ width: '100%' }} size="middle">
-        {fields.map((field) => {
-          if (field.type === 'input') {
-            return <Input key={field.id} placeholder={field.label} />;
-          }
-
-          if (field.type === 'select') {
-            return (
-              <Select
-                key={field.id}
-                style={{ width: '100%' }}
-                placeholder={field.label}
-                options={[
-                  { value: 'option-1', label: 'Option 1' },
-                  { value: 'option-2', label: 'Option 2' },
-                ]}
-              />
-            );
-          }
-
-          return <Checkbox key={field.id}>{field.label}</Checkbox>;
-        })}
-      </Space>
+      <Form layout="vertical">
+        {fields.map((field) => (
+          <PreviewField key={field.id} field={field} />
+        ))}
+      </Form>
     </section>
   );
 }
