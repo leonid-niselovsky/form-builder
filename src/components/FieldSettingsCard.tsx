@@ -1,4 +1,4 @@
-import { DeleteOutlined } from '@ant-design/icons';
+import { CopyOutlined, DeleteOutlined } from '@ant-design/icons';
 import {
   Button,
   Card,
@@ -13,6 +13,7 @@ import {
 } from 'antd';
 import { useAppDispatch } from '../store/hooks';
 import {
+  duplicateField,
   removeField,
   toggleFieldRequired,
   updateFieldHelperText,
@@ -49,14 +50,23 @@ function FieldSettingsCard({ field }: FieldSettingsCardProps) {
       size="small"
       title={<Tag>{fieldTypeLabels[field.type]}</Tag>}
       extra={
-        <Tooltip title="Remove field">
-          <Button
-            danger
-            type="text"
-            icon={<DeleteOutlined />}
-            onClick={() => dispatch(removeField(field.id))}
-          />
-        </Tooltip>
+        <Space size={4}>
+          <Tooltip title="Duplicate field">
+            <Button
+              type="text"
+              icon={<CopyOutlined />}
+              onClick={() => dispatch(duplicateField(field.id))}
+            />
+          </Tooltip>
+          <Tooltip title="Remove field">
+            <Button
+              danger
+              type="text"
+              icon={<DeleteOutlined />}
+              onClick={() => dispatch(removeField(field.id))}
+            />
+          </Tooltip>
+        </Space>
       }
     >
       <Space direction="vertical" style={{ width: '100%' }}>

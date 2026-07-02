@@ -135,6 +135,19 @@ const formSlice = createSlice({
     removeField: (state, action: PayloadAction<string>) => {
       state.fields = state.fields.filter((el) => el.id !== action.payload);
     },
+    duplicateField: (state, action: PayloadAction<string>) => {
+      const index = state.fields.findIndex((el) => el.id === action.payload);
+      const field = state.fields[index];
+
+      if (field) {
+        state.fields.splice(index + 1, 0, {
+          ...field,
+          id: crypto.randomUUID(),
+          label: `${field.label} copy`,
+          options: field.options ? [...field.options] : undefined,
+        });
+      }
+    },
   },
 });
 
@@ -148,5 +161,6 @@ export const {
   updateFieldOptions,
   updateFieldMin,
   updateFieldMax,
+  duplicateField,
 } = formSlice.actions;
 export default formSlice.reducer;
