@@ -6,11 +6,13 @@ import {
   toggleFieldRequired,
   updateFieldHelperText,
   updateFieldLabel,
+  updateFieldOptions,
   updateFieldPlaceholder,
   type Field,
   type FieldType,
 } from '../store/slices/formSlice';
 
+const { TextArea } = Input;
 const { Text } = Typography;
 
 interface FieldSettingsCardProps {
@@ -67,6 +69,22 @@ function FieldSettingsCard({ field }: FieldSettingsCardProps) {
                 updateFieldPlaceholder({
                   id: field.id,
                   placeholder: e.target.value,
+                })
+              );
+            }}
+          />
+        )}
+
+        {field.type === 'select' && (
+          <TextArea
+            value={(field.options ?? []).join('\n')}
+            placeholder={'One option per line, e.g.\nKazakhstan\nGermany\nCanada'}
+            autoSize={{ minRows: 3 }}
+            onChange={(e) => {
+              dispatch(
+                updateFieldOptions({
+                  id: field.id,
+                  options: e.target.value.split('\n'),
                 })
               );
             }}

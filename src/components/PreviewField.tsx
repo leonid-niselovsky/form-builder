@@ -26,7 +26,9 @@ function PreviewField({ field }: PreviewFieldProps) {
         <Form.Item label={field.label} required={field.required} extra={field.helperText}>
           <Select
             placeholder={field.placeholder}
-            options={(field.options ?? []).map((option) => ({ value: option, label: option }))}
+            options={(field.options ?? [])
+              .filter((option) => option.trim().length > 0)
+              .map((option) => ({ value: option, label: option }))}
           />
         </Form.Item>
       );

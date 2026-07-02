@@ -33,6 +33,11 @@ interface UpdateFieldHelperTextPayload {
   helperText: string;
 }
 
+interface UpdateFieldOptionsPayload {
+  id: string;
+  options: string[];
+}
+
 const initialState: FormState = {
   fields: [],
 };
@@ -96,6 +101,13 @@ const formSlice = createSlice({
         field.helperText = action.payload.helperText;
       }
     },
+    updateFieldOptions: (state, action: PayloadAction<UpdateFieldOptionsPayload>) => {
+      const field = state.fields.find((el) => el.id === action.payload.id);
+
+      if (field) {
+        field.options = action.payload.options;
+      }
+    },
     removeField: (state, action: PayloadAction<string>) => {
       state.fields = state.fields.filter((el) => el.id !== action.payload);
     },
@@ -109,5 +121,6 @@ export const {
   updateFieldPlaceholder,
   toggleFieldRequired,
   updateFieldHelperText,
+  updateFieldOptions,
 } = formSlice.actions;
 export default formSlice.reducer;
