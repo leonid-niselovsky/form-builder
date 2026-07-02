@@ -77,12 +77,24 @@ const formSlice = createSlice({
         field.placeholder = action.payload.placeholder;
       }
     },
+    toggleFieldRequired: (state, action: PayloadAction<string>) => {
+      const field = state.fields.find((el) => el.id === action.payload);
+
+      if (field) {
+        field.required = !field.required;
+      }
+    },
     removeField: (state, action: PayloadAction<string>) => {
       state.fields = state.fields.filter((el) => el.id !== action.payload);
     },
   },
 });
 
-export const { addField, removeField, updateFieldLabel, updateFieldPlaceholder } =
-  formSlice.actions;
+export const {
+  addField,
+  removeField,
+  updateFieldLabel,
+  updateFieldPlaceholder,
+  toggleFieldRequired,
+} = formSlice.actions;
 export default formSlice.reducer;

@@ -1,13 +1,16 @@
 import { DeleteOutlined } from '@ant-design/icons';
-import { Button, Card, Input, Space, Tag, Tooltip } from 'antd';
+import { Button, Card, Flex, Input, Space, Switch, Tag, Tooltip, Typography } from 'antd';
 import { useAppDispatch } from '../store/hooks';
 import {
   removeField,
+  toggleFieldRequired,
   updateFieldLabel,
   updateFieldPlaceholder,
   type Field,
   type FieldType,
 } from '../store/slices/formSlice';
+
+const { Text } = Typography;
 
 interface FieldSettingsCardProps {
   field: Field;
@@ -68,6 +71,14 @@ function FieldSettingsCard({ field }: FieldSettingsCardProps) {
             }}
           />
         )}
+
+        <Flex align="center" gap={8}>
+          <Switch
+            checked={field.required}
+            onChange={() => dispatch(toggleFieldRequired(field.id))}
+          />
+          <Text>Required</Text>
+        </Flex>
       </Space>
     </Card>
   );
