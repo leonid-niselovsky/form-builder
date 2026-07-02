@@ -1,6 +1,6 @@
 import { Space, Typography } from 'antd';
 import { useAppSelector } from '../store/hooks';
-import FormFieldItem from './FormFieldItem';
+import FieldSettingsCard from './FieldSettingsCard';
 
 const { Title } = Typography;
 
@@ -13,7 +13,7 @@ function FormBuilder() {
 
       <Space direction="vertical" style={{ width: '100%' }} size="middle">
         {fields.map((field) => (
-          <FormFieldItem key={field.id} field={field} />
+          <FieldSettingsCard key={field.id} field={field} />
         ))}
       </Space>
     </section>
