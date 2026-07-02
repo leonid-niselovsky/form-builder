@@ -28,6 +28,11 @@ interface UpdateFieldPlaceholderPayload {
   placeholder: string;
 }
 
+interface UpdateFieldHelperTextPayload {
+  id: string;
+  helperText: string;
+}
+
 const initialState: FormState = {
   fields: [],
 };
@@ -84,6 +89,13 @@ const formSlice = createSlice({
         field.required = !field.required;
       }
     },
+    updateFieldHelperText: (state, action: PayloadAction<UpdateFieldHelperTextPayload>) => {
+      const field = state.fields.find((el) => el.id === action.payload.id);
+
+      if (field) {
+        field.helperText = action.payload.helperText;
+      }
+    },
     removeField: (state, action: PayloadAction<string>) => {
       state.fields = state.fields.filter((el) => el.id !== action.payload);
     },
@@ -96,5 +108,6 @@ export const {
   updateFieldLabel,
   updateFieldPlaceholder,
   toggleFieldRequired,
+  updateFieldHelperText,
 } = formSlice.actions;
 export default formSlice.reducer;

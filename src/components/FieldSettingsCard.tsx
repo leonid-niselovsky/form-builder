@@ -4,6 +4,7 @@ import { useAppDispatch } from '../store/hooks';
 import {
   removeField,
   toggleFieldRequired,
+  updateFieldHelperText,
   updateFieldLabel,
   updateFieldPlaceholder,
   type Field,
@@ -71,6 +72,19 @@ function FieldSettingsCard({ field }: FieldSettingsCardProps) {
             }}
           />
         )}
+
+        <Input
+          value={field.helperText}
+          placeholder="Helper text"
+          onChange={(e) => {
+            dispatch(
+              updateFieldHelperText({
+                id: field.id,
+                helperText: e.target.value,
+              })
+            );
+          }}
+        />
 
         <Flex align="center" gap={8}>
           <Switch
