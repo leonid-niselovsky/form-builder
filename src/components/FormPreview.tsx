@@ -1,4 +1,4 @@
-import { Form, Typography } from 'antd';
+import { Empty, Form, Typography } from 'antd';
 import { useAppSelector } from '../store/hooks';
 import PreviewField from './PreviewField';
 
@@ -11,11 +11,15 @@ function FormPreview() {
     <section>
       <Title level={3}>Form Preview</Title>
 
-      <Form layout="vertical">
-        {fields.map((field) => (
-          <PreviewField key={field.id} field={field} />
-        ))}
-      </Form>
+      {fields.length === 0 ? (
+        <Empty description="Preview will appear here." />
+      ) : (
+        <Form layout="vertical">
+          {fields.map((field) => (
+            <PreviewField key={field.id} field={field} />
+          ))}
+        </Form>
+      )}
     </section>
   );
 }
