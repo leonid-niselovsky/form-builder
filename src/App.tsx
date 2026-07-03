@@ -14,35 +14,35 @@ const { Sider, Header, Content } = Layout;
 function App() {
   return (
     <Layout style={{ height: '100vh' }}>
-      <Sider width={220} style={{ padding: 16, background: '#fff' }}>
-        <FieldPalette />
-      </Sider>
+      <Header
+        style={{
+          background: '#fff',
+          padding: '0 24px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'flex-end',
+        }}
+      >
+        <Space>
+          <LoadFormButton />
+          <SaveFormButton />
+          <ExportFormButton />
+          <ImportFormButton />
+          <ResetFormButton />
+        </Space>
+      </Header>
 
       <Layout>
-        <Header
-          style={{
-            background: '#fff',
-            padding: '0 24px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'flex-end',
-          }}
-        >
-          <Space>
-            <LoadFormButton />
-            <SaveFormButton />
-            <ExportFormButton />
-            <ImportFormButton />
-            <ResetFormButton />
-          </Space>
-        </Header>
+        <Sider width={240} style={{ padding: 16, background: '#f5f5f5' }}>
+          <FieldPalette />
+        </Sider>
 
         <Content style={{ padding: 24, overflowY: 'auto', background: '#f5f5f5' }}>
           <Flex gap={24} align="flex-start">
             <div style={{ flex: 1, minWidth: 0 }}>
               <FormBuilder />
             </div>
-            <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ width: 480, flexShrink: 0 }}>
               <FormPreview />
             </div>
           </Flex>

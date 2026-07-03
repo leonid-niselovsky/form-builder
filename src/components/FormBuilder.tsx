@@ -1,11 +1,9 @@
 import { DndContext, PointerSensor, useSensor, useSensors, type DragEndEvent } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
-import { Empty, Space, Typography } from 'antd';
+import { Card, Empty, Space } from 'antd';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { reorderFields } from '../store/slices/formSlice';
 import SortableFieldCard from './SortableFieldCard';
-
-const { Title } = Typography;
 
 function FormBuilder() {
   const dispatch = useAppDispatch();
@@ -21,9 +19,7 @@ function FormBuilder() {
   };
 
   return (
-    <section>
-      <Title level={3}>Form Builder</Title>
-
+    <Card title="Form Builder">
       {fields.length === 0 ? (
         <Empty description="No fields yet. Add your first field from the palette." />
       ) : (
@@ -37,7 +33,7 @@ function FormBuilder() {
           </SortableContext>
         </DndContext>
       )}
-    </section>
+    </Card>
   );
 }
 
