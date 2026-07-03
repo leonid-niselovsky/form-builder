@@ -50,6 +50,10 @@ const initialState: FormState = {
   fields: [],
 };
 
+function findFieldById(fields: Field[], id: string): Field | undefined {
+  return fields.find((field) => field.id === id);
+}
+
 const formSlice = createSlice({
   name: 'form',
   initialState,
@@ -58,49 +62,49 @@ const formSlice = createSlice({
       state.fields.push(createField(action.payload));
     },
     updateFieldLabel: (state, action: PayloadAction<UpdateFieldLabelPayload>) => {
-      const field = state.fields.find((el) => el.id === action.payload.id);
+      const field = findFieldById(state.fields, action.payload.id);
 
       if (field) {
         field.label = action.payload.label;
       }
     },
     updateFieldPlaceholder: (state, action: PayloadAction<UpdateFieldPlaceholderPayload>) => {
-      const field = state.fields.find((el) => el.id === action.payload.id);
+      const field = findFieldById(state.fields, action.payload.id);
 
       if (field) {
         field.placeholder = action.payload.placeholder;
       }
     },
     toggleFieldRequired: (state, action: PayloadAction<string>) => {
-      const field = state.fields.find((el) => el.id === action.payload);
+      const field = findFieldById(state.fields, action.payload);
 
       if (field) {
         field.required = !field.required;
       }
     },
     updateFieldHelperText: (state, action: PayloadAction<UpdateFieldHelperTextPayload>) => {
-      const field = state.fields.find((el) => el.id === action.payload.id);
+      const field = findFieldById(state.fields, action.payload.id);
 
       if (field) {
         field.helperText = action.payload.helperText;
       }
     },
     updateFieldOptions: (state, action: PayloadAction<UpdateFieldOptionsPayload>) => {
-      const field = state.fields.find((el) => el.id === action.payload.id);
+      const field = findFieldById(state.fields, action.payload.id);
 
       if (field) {
         field.options = action.payload.options;
       }
     },
     updateFieldMin: (state, action: PayloadAction<UpdateFieldMinPayload>) => {
-      const field = state.fields.find((el) => el.id === action.payload.id);
+      const field = findFieldById(state.fields, action.payload.id);
 
       if (field) {
         field.min = action.payload.min;
       }
     },
     updateFieldMax: (state, action: PayloadAction<UpdateFieldMaxPayload>) => {
-      const field = state.fields.find((el) => el.id === action.payload.id);
+      const field = findFieldById(state.fields, action.payload.id);
 
       if (field) {
         field.max = action.payload.max;
