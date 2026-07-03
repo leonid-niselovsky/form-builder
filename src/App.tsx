@@ -13,7 +13,7 @@ function App() {
         <FieldPalette />
       </Sider>
 
-      <Content style={{ padding: 24 }}>
+      <Content style={{ padding: 24, overflowY: 'auto', background: '#f5f5f5' }}>
         <Flex gap={24} align="flex-start">
           <div style={{ flex: 1, minWidth: 0 }}>
             <FormBuilder />
