@@ -1,4 +1,5 @@
-import { CopyOutlined, DeleteOutlined } from '@ant-design/icons';
+import { CopyOutlined, DeleteOutlined, HolderOutlined } from '@ant-design/icons';
+import type { DraggableAttributes, DraggableSyntheticListeners } from '@dnd-kit/core';
 import {
   Button,
   Card,
@@ -31,6 +32,8 @@ const { Text } = Typography;
 
 interface FieldSettingsCardProps {
   field: Field;
+  dragHandleAttributes?: DraggableAttributes;
+  dragHandleListeners?: DraggableSyntheticListeners;
 }
 
 const fieldTypeLabels: Record<FieldType, string> = {
@@ -42,13 +45,28 @@ const fieldTypeLabels: Record<FieldType, string> = {
   number: 'Number Input',
 };
 
-function FieldSettingsCard({ field }: FieldSettingsCardProps) {
+function FieldSettingsCard({
+  field,
+  dragHandleAttributes,
+  dragHandleListeners,
+}: FieldSettingsCardProps) {
   const dispatch = useAppDispatch();
 
   return (
     <Card
       size="small"
-      title={<Tag>{fieldTypeLabels[field.type]}</Tag>}
+      title={
+        <Space size={8}>
+          <span
+            {...dragHandleAttributes}
+            {...dragHandleListeners}
+            style={{ cursor: 'grab', display: 'inline-flex', touchAction: 'none' }}
+          >
+            <HolderOutlined />
+          </span>
+          <Tag>{fieldTypeLabels[field.type]}</Tag>
+        </Space>
+      }
       extra={
         <Space size={4}>
           <Tooltip title="Duplicate field">

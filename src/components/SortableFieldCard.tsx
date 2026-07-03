@@ -18,8 +18,12 @@ function SortableFieldCard({ field }: SortableFieldCardProps) {
   };
 
   return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      <FieldSettingsCard field={field} />
+    <div ref={setNodeRef} style={style}>
+      <FieldSettingsCard
+        field={field}
+        dragHandleAttributes={attributes}
+        dragHandleListeners={listeners}
+      />
     </div>
   );
 }
