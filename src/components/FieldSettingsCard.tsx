@@ -23,9 +23,8 @@ import {
   updateFieldMin,
   updateFieldOptions,
   updateFieldPlaceholder,
-  type Field,
-  type FieldType,
 } from '../store/slices/formSlice';
+import type { Field, FieldType } from '../types/form';
 
 const { TextArea } = Input;
 const { Text } = Typography;

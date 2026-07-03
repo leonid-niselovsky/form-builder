@@ -1,4 +1,4 @@
-import type { Field, FieldType } from '../store/slices/formSlice';
+import type { Field, FieldType } from '../types/form';
 
 const VALID_FIELD_TYPES: FieldType[] = ['input', 'textarea', 'select', 'checkbox', 'date', 'number'];
 

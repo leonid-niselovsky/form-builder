@@ -1,5 +1,5 @@
 import { Checkbox, DatePicker, Form, Input, InputNumber, Select } from 'antd';
-import type { Field } from '../store/slices/formSlice';
+import type { Field } from '../types/form';
 
 interface PreviewFieldProps {
   field: Field;

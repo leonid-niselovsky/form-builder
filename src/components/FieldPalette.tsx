@@ -1,6 +1,7 @@
 import { Button, Card, Space } from 'antd';
 import { useAppDispatch } from '../store/hooks';
-import { addField, type FieldType } from '../store/slices/formSlice';
+import { addField } from '../store/slices/formSlice';
+import type { FieldType } from '../types/form';
 
 const paletteItems: { type: FieldType; label: string }[] = [
   { type: 'input', label: 'Text Input' },

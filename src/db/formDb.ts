@@ -1,13 +1,5 @@
 import Dexie, { type EntityTable } from 'dexie';
-import type { Field } from '../store/slices/formSlice';
-
-export interface FormTemplate {
-  id: string;
-  name: string;
-  fields: Field[];
-  createdAt: string;
-  updatedAt: string;
-}
+import type { FormTemplate } from '../types/form';
 
 class FormDatabase extends Dexie {
   formTemplates!: EntityTable<FormTemplate, 'id'>;

@@ -4,7 +4,7 @@ import { Button, Input, List, message, Modal } from 'antd';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { loadForm, renameForm, setFormId } from '../store/slices/formSlice';
 import { deleteFormTemplate, listFormTemplates, renameFormTemplate } from '../db/formTemplateService';
-import type { FormTemplate } from '../db/formDb';
+import type { FormTemplate } from '../types/form';
 
 function LoadFormButton() {
   const dispatch = useAppDispatch();

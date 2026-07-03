@@ -1,5 +1,5 @@
-import { formDb, type FormTemplate } from './formDb';
-import type { Field } from '../store/slices/formSlice';
+import { formDb } from './formDb';
+import type { Field, FormTemplate } from '../types/form';
 
 export function listFormTemplates(): Promise<FormTemplate[]> {
   return formDb.formTemplates.orderBy('updatedAt').reverse().toArray();

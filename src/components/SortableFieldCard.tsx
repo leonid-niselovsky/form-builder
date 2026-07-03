@@ -1,7 +1,7 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import FieldSettingsCard from './FieldSettingsCard';
-import type { Field } from '../store/slices/formSlice';
+import type { Field } from '../types/form';
 
 interface SortableFieldCardProps {
   field: Field;

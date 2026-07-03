@@ -1,18 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-
-export type FieldType = 'input' | 'textarea' | 'select' | 'checkbox' | 'date' | 'number';
-
-export interface Field {
-  id: string;
-  type: FieldType;
-  label: string;
-  placeholder?: string;
-  required: boolean;
-  helperText?: string;
-  options?: string[];
-  min?: number;
-  max?: number;
-}
+import type { Field, FieldType } from '../../types/form';
 
 interface FormState {
   id: string | null;
