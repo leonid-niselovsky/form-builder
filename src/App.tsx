@@ -1,5 +1,5 @@
 import './App.css';
-import { Flex, Grid, Layout, Space, Typography } from 'antd';
+import { Flex, Grid, Layout, Space, theme, Typography } from 'antd';
 import ExportFormButton from './components/ExportFormButton';
 import FieldPalette from './components/FieldPalette';
 import FormBuilder from './components/FormBuilder';
@@ -8,22 +8,25 @@ import ImportFormButton from './components/ImportFormButton';
 import LoadFormButton from './components/LoadFormButton';
 import ResetFormButton from './components/ResetFormButton';
 import SaveFormButton from './components/SaveFormButton';
+import ThemeToggle from './components/ThemeToggle';
 import { useAppSelector } from './store/hooks';
 
 const { Sider, Header, Content } = Layout;
 const { Title } = Typography;
 const { useBreakpoint } = Grid;
+const { useToken } = theme;
 
 function App() {
   const formName = useAppSelector((state) => state.form.name);
   const screens = useBreakpoint();
   const isCompact = !screens.lg;
+  const { token } = useToken();
 
   return (
     <Layout style={{ height: isCompact ? 'auto' : '100vh', minHeight: '100vh' }}>
       <Header
         style={{
-          background: '#fff',
+          background: token.colorBgContainer,
           padding: '12px 24px',
           height: 'auto',
           display: 'flex',
@@ -43,11 +46,15 @@ function App() {
           <ExportFormButton />
           <ImportFormButton />
           <ResetFormButton />
+          <ThemeToggle />
         </Space>
       </Header>
 
       <Layout style={{ flexDirection: isCompact ? 'column' : 'row' }}>
-        <Sider width={isCompact ? '100%' : 240} style={{ padding: 16, background: '#f5f5f5' }}>
+        <Sider
+          width={isCompact ? '100%' : 240}
+          style={{ padding: 16, background: token.colorBgLayout }}
+        >
           <FieldPalette />
         </Sider>
 
@@ -55,7 +62,7 @@ function App() {
           style={{
             padding: 24,
             overflowY: isCompact ? 'visible' : 'auto',
-            background: '#f5f5f5',
+            background: token.colorBgLayout,
             width: isCompact ? '100%' : undefined,
           }}
         >
