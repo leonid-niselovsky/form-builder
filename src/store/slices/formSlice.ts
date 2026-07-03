@@ -148,6 +148,18 @@ const formSlice = createSlice({
         });
       }
     },
+    reorderFields: (state, action: PayloadAction<{ activeId: string; overId: string }>) => {
+      const { activeId, overId } = action.payload;
+      const activeIndex = state.fields.findIndex((el) => el.id === activeId);
+      const overIndex = state.fields.findIndex((el) => el.id === overId);
+
+      if (activeIndex === -1 || overIndex === -1) {
+        return;
+      }
+
+      const [movedField] = state.fields.splice(activeIndex, 1);
+      state.fields.splice(overIndex, 0, movedField);
+    },
   },
 });
 
@@ -162,5 +174,6 @@ export const {
   updateFieldMin,
   updateFieldMax,
   duplicateField,
+  reorderFields,
 } = formSlice.actions;
 export default formSlice.reducer;
