@@ -4,6 +4,7 @@ import FieldPalette from './components/FieldPalette';
 import FormBuilder from './components/FormBuilder';
 import FormPreview from './components/FormPreview';
 import ExportFormButton from './components/ExportFormButton';
+import ImportFormButton from './components/ImportFormButton';
 import LoadFormButton from './components/LoadFormButton';
 import ResetFormButton from './components/ResetFormButton';
 import SaveFormButton from './components/SaveFormButton';
@@ -31,6 +32,7 @@ function App() {
             <LoadFormButton />
             <SaveFormButton />
             <ExportFormButton />
+            <ImportFormButton />
             <ResetFormButton />
           </Space>
         </Header>
