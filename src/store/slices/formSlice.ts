@@ -175,7 +175,7 @@ const formSlice = createSlice({
       state.name = action.payload.name;
       state.fields = action.payload.fields;
     },
-    setFormId: (state, action: PayloadAction<string>) => {
+    setFormId: (state, action: PayloadAction<string | null>) => {
       state.id = action.payload;
     },
     renameForm: (state, action: PayloadAction<string>) => {

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { EditOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Button, Input, List, Modal } from 'antd';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { loadForm, renameForm } from '../store/slices/formSlice';
-import { listFormTemplates, renameFormTemplate } from '../db/formTemplateService';
+import { loadForm, renameForm, setFormId } from '../store/slices/formSlice';
+import { deleteFormTemplate, listFormTemplates, renameFormTemplate } from '../db/formTemplateService';
 import type { FormTemplate } from '../db/formDb';
 
 function LoadFormButton() {
@@ -52,6 +52,24 @@ function LoadFormButton() {
     refreshTemplates();
   };
 
+  const handleDeleteClick = (template: FormTemplate) => {
+    Modal.confirm({
+      title: 'Delete form',
+      content: `Delete "${template.name}"? This can't be undone.`,
+      okText: 'Delete',
+      okButtonProps: { danger: true },
+      onOk: async () => {
+        await deleteFormTemplate(template.id);
+
+        if (template.id === currentFormId) {
+          dispatch(setFormId(null));
+        }
+
+        refreshTemplates();
+      },
+    });
+  };
+
   return (
     <>
       <Button onClick={() => setIsModalOpen(true)}>Load Form</Button>
@@ -73,6 +91,13 @@ function LoadFormButton() {
                   type="text"
                   icon={<EditOutlined />}
                   onClick={() => handleRenameClick(template)}
+                />,
+                <Button
+                  key="delete"
+                  type="text"
+                  danger
+                  icon={<DeleteOutlined />}
+                  onClick={() => handleDeleteClick(template)}
                 />,
                 <Button key="load" type="link" onClick={() => handleLoad(template)}>
                   Load
