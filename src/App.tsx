@@ -4,6 +4,7 @@ import FieldPalette from './components/FieldPalette';
 import FormBuilder from './components/FormBuilder';
 import FormPreview from './components/FormPreview';
 import LoadFormButton from './components/LoadFormButton';
+import ResetFormButton from './components/ResetFormButton';
 import SaveFormButton from './components/SaveFormButton';
 
 const { Sider, Header, Content } = Layout;
@@ -28,6 +29,7 @@ function App() {
           <Space>
             <LoadFormButton />
             <SaveFormButton />
+            <ResetFormButton />
           </Space>
         </Header>
 
