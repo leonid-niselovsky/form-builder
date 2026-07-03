@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Input, Modal } from 'antd';
+import { Button, Input, message, Modal } from 'antd';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { loadForm } from '../store/slices/formSlice';
 import { createFormTemplate, updateFormTemplateFields } from '../db/formTemplateService';
@@ -10,9 +10,10 @@ function SaveFormButton() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [pendingName, setPendingName] = useState(name);
 
-  const handleSaveClick = () => {
+  const handleSaveClick = async () => {
     if (id) {
-      updateFormTemplateFields(id, fields);
+      await updateFormTemplateFields(id, fields);
+      message.success('Form saved successfully.');
       return;
     }
 
@@ -24,6 +25,7 @@ function SaveFormButton() {
     const template = await createFormTemplate(pendingName.trim() || 'Untitled form', fields);
     dispatch(loadForm({ id: template.id, name: template.name, fields: template.fields }));
     setIsModalOpen(false);
+    message.success('Form saved successfully.');
   };
 
   return (

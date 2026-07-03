@@ -20,9 +20,10 @@ function ImportFormButton() {
       const text = await file.text();
       const schema = validateFormSchema(JSON.parse(text));
       dispatch(loadForm({ id: null, name: schema.name, fields: schema.fields }));
+      message.success('Schema imported successfully.');
     } catch (error) {
       const reason = error instanceof Error ? error.message : 'Unknown error.';
-      message.error(`Could not import schema: ${reason}`);
+      message.error(`Invalid schema: ${reason}`);
     }
   };
 

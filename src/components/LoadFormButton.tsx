@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { Button, Input, List, Modal } from 'antd';
+import { Button, Input, List, message, Modal } from 'antd';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { loadForm, renameForm, setFormId } from '../store/slices/formSlice';
 import { deleteFormTemplate, listFormTemplates, renameFormTemplate } from '../db/formTemplateService';
@@ -29,6 +29,7 @@ function LoadFormButton() {
   const handleLoad = (template: FormTemplate) => {
     dispatch(loadForm({ id: template.id, name: template.name, fields: template.fields }));
     setIsModalOpen(false);
+    message.success('Form loaded successfully.');
   };
 
   const handleRenameClick = (template: FormTemplate) => {
@@ -66,6 +67,7 @@ function LoadFormButton() {
         }
 
         refreshTemplates();
+        message.success('Form deleted successfully.');
       },
     });
   };
