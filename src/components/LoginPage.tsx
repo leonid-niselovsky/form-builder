@@ -1,9 +1,10 @@
-import { Button, Card, Flex, Form, Input, Typography } from 'antd';
+import { Button, Card, Flex, Form, Input, theme, Typography } from 'antd';
 import { useAppDispatch } from '../store/hooks';
 import { login } from '../store/slices/authSlice';
 import { storeUsername } from '../utils/authStorage';
 
 const { Title, Text } = Typography;
+const { useToken } = theme;
 
 interface LoginFormValues {
   username: string;
@@ -12,6 +13,7 @@ interface LoginFormValues {
 
 function LoginPage() {
   const dispatch = useAppDispatch();
+  const { token } = useToken();
 
   const handleFinish = (values: LoginFormValues) => {
     storeUsername(values.username);
@@ -19,7 +21,11 @@ function LoginPage() {
   };
 
   return (
-    <Flex align="center" justify="center" style={{ minHeight: '100vh', padding: 24 }}>
+    <Flex
+      align="center"
+      justify="center"
+      style={{ minHeight: '100vh', padding: 24, background: token.colorBgLayout }}
+    >
       <Card style={{ width: 360 }}>
         <Title level={3} style={{ marginTop: 0 }}>
           Business Form Studio

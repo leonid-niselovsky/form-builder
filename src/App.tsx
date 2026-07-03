@@ -6,6 +6,7 @@ import FormBuilder from './components/FormBuilder';
 import FormPreview from './components/FormPreview';
 import ImportFormButton from './components/ImportFormButton';
 import LoadFormButton from './components/LoadFormButton';
+import LogoutButton from './components/LogoutButton';
 import ResetFormButton from './components/ResetFormButton';
 import SaveFormButton from './components/SaveFormButton';
 import ThemeToggle from './components/ThemeToggle';
@@ -47,6 +48,7 @@ function App() {
           <ImportFormButton />
           <ResetFormButton />
           <ThemeToggle />
+          <LogoutButton />
         </Space>
       </Header>
 
