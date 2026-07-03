@@ -1,8 +1,9 @@
 import './App.css';
-import { Flex, Layout } from 'antd';
+import { Flex, Layout, Space } from 'antd';
 import FieldPalette from './components/FieldPalette';
 import FormBuilder from './components/FormBuilder';
 import FormPreview from './components/FormPreview';
+import LoadFormButton from './components/LoadFormButton';
 import SaveFormButton from './components/SaveFormButton';
 
 const { Sider, Header, Content } = Layout;
@@ -24,7 +25,10 @@ function App() {
             justifyContent: 'flex-end',
           }}
         >
-          <SaveFormButton />
+          <Space>
+            <LoadFormButton />
+            <SaveFormButton />
+          </Space>
         </Header>
 
         <Content style={{ padding: 24, overflowY: 'auto', background: '#f5f5f5' }}>
