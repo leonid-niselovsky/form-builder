@@ -3,6 +3,7 @@ import { Flex, Layout, Space } from 'antd';
 import FieldPalette from './components/FieldPalette';
 import FormBuilder from './components/FormBuilder';
 import FormPreview from './components/FormPreview';
+import ExportFormButton from './components/ExportFormButton';
 import LoadFormButton from './components/LoadFormButton';
 import ResetFormButton from './components/ResetFormButton';
 import SaveFormButton from './components/SaveFormButton';
@@ -29,6 +30,7 @@ function App() {
           <Space>
             <LoadFormButton />
             <SaveFormButton />
+            <ExportFormButton />
             <ResetFormButton />
           </Space>
         </Header>
