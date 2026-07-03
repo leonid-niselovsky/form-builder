@@ -15,6 +15,14 @@ export interface Field {
 }
 
 interface FormState {
+  id: string | null;
+  name: string;
+  fields: Field[];
+}
+
+interface LoadFormPayload {
+  id: string | null;
+  name: string;
   fields: Field[];
 }
 
@@ -49,6 +57,8 @@ interface UpdateFieldMaxPayload {
 }
 
 const initialState: FormState = {
+  id: null,
+  name: 'Untitled form',
   fields: [],
 };
 
@@ -160,6 +170,17 @@ const formSlice = createSlice({
       const [movedField] = state.fields.splice(activeIndex, 1);
       state.fields.splice(overIndex, 0, movedField);
     },
+    loadForm: (state, action: PayloadAction<LoadFormPayload>) => {
+      state.id = action.payload.id;
+      state.name = action.payload.name;
+      state.fields = action.payload.fields;
+    },
+    setFormId: (state, action: PayloadAction<string>) => {
+      state.id = action.payload;
+    },
+    renameForm: (state, action: PayloadAction<string>) => {
+      state.name = action.payload;
+    },
   },
 });
 
@@ -175,5 +196,8 @@ export const {
   updateFieldMax,
   duplicateField,
   reorderFields,
+  loadForm,
+  setFormId,
+  renameForm,
 } = formSlice.actions;
 export default formSlice.reducer;
