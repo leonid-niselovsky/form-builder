@@ -1,5 +1,5 @@
 import './App.css';
-import { Flex, Layout, Space } from 'antd';
+import { Flex, Layout, Space, Typography } from 'antd';
 import FieldPalette from './components/FieldPalette';
 import FormBuilder from './components/FormBuilder';
 import FormPreview from './components/FormPreview';
@@ -8,10 +8,14 @@ import ImportFormButton from './components/ImportFormButton';
 import LoadFormButton from './components/LoadFormButton';
 import ResetFormButton from './components/ResetFormButton';
 import SaveFormButton from './components/SaveFormButton';
+import { useAppSelector } from './store/hooks';
 
 const { Sider, Header, Content } = Layout;
+const { Title } = Typography;
 
 function App() {
+  const formName = useAppSelector((state) => state.form.name);
+
   return (
     <Layout style={{ height: '100vh' }}>
       <Header
@@ -20,9 +24,13 @@ function App() {
           padding: '0 24px',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'flex-end',
+          justifyContent: 'space-between',
         }}
       >
+        <Title level={4} style={{ margin: 0 }}>
+          {formName}
+        </Title>
+
         <Space>
           <LoadFormButton />
           <SaveFormButton />
