@@ -1,4 +1,5 @@
 import { createRoot } from 'react-dom/client';
+import { App as AntApp } from 'antd';
 import './index.css';
 import App from './App';
 import { Provider } from 'react-redux';
@@ -9,9 +10,11 @@ import { ThemeProvider } from './theme/ThemeProvider';
 createRoot(document.getElementById('root')!).render(
   <Provider store={store}>
     <ThemeProvider>
-      <AuthGate>
-        <App />
-      </AuthGate>
+      <AntApp>
+        <AuthGate>
+          <App />
+        </AuthGate>
+      </AntApp>
     </ThemeProvider>
   </Provider>
 );

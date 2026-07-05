@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Input, message, Modal } from 'antd';
+import { App, Button, Input, Modal } from 'antd';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { loadForm } from '../store/slices/formSlice';
 import { createFormTemplate, updateFormTemplateFields } from '../db/formTemplateService';
@@ -7,6 +7,7 @@ import { createFormTemplate, updateFormTemplateFields } from '../db/formTemplate
 function SaveFormButton() {
   const dispatch = useAppDispatch();
   const { id, name, fields } = useAppSelector((state) => state.form);
+  const { message } = App.useApp();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [pendingName, setPendingName] = useState(name);
 

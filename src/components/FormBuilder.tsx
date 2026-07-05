@@ -24,8 +24,11 @@ function FormBuilder() {
         <Empty description="No fields yet. Add your first field from the palette." />
       ) : (
         <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
-          <SortableContext items={fields.map((field) => field.id)} strategy={verticalListSortingStrategy}>
-            <Space direction="vertical" style={{ width: '100%' }} size="middle">
+          <SortableContext
+            items={fields.map((field) => field.id)}
+            strategy={verticalListSortingStrategy}
+          >
+            <Space orientation="vertical" style={{ width: '100%' }} size="middle">
               {fields.map((field) => (
                 <SortableFieldCard key={field.id} field={field} />
               ))}

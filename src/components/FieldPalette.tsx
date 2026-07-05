@@ -17,7 +17,7 @@ function FieldPalette() {
 
   return (
     <Card title="Field Palette">
-      <Space direction="vertical" style={{ width: '100%' }}>
+      <Space orientation="vertical" style={{ width: '100%' }}>
         {paletteItems.map((item) => (
           <Button key={item.type} block onClick={() => dispatch(addField(item.type))}>
             {item.label}

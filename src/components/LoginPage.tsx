@@ -31,8 +31,8 @@ function LoginPage() {
           Business Form Studio
         </Title>
         <Text type="secondary">
-          Demo login — any username and password will work, this is a local, portfolio-only
-          project with no real backend.
+          Demo login — any username and password will work, this is a local, portfolio-only project
+          with no real backend.
         </Text>
 
         <Form layout="vertical" onFinish={handleFinish} style={{ marginTop: 24 }}>

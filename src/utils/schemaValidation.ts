@@ -1,6 +1,13 @@
 import type { Field, FieldType } from '../types/form';
 
-const VALID_FIELD_TYPES: FieldType[] = ['input', 'textarea', 'select', 'checkbox', 'date', 'number'];
+const VALID_FIELD_TYPES: FieldType[] = [
+  'input',
+  'textarea',
+  'select',
+  'checkbox',
+  'date',
+  'number',
+];
 
 export interface FormSchema {
   name: string;

@@ -2,7 +2,13 @@ import { Button } from 'antd';
 import { useAppSelector } from '../store/hooks';
 
 function slugify(value: string): string {
-  return value.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || 'form';
+  return (
+    value
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '') || 'form'
+  );
 }
 
 function ExportFormButton() {

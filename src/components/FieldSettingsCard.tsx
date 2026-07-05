@@ -86,7 +86,7 @@ function FieldSettingsCard({
         </Space>
       }
     >
-      <Space direction="vertical" style={{ width: '100%' }}>
+      <Space orientation="vertical" style={{ width: '100%' }}>
         <Input
           value={field.label}
           placeholder="Field label"

@@ -1,11 +1,12 @@
 import { useRef } from 'react';
-import { Button, message } from 'antd';
+import { App, Button } from 'antd';
 import { useAppDispatch } from '../store/hooks';
 import { loadForm } from '../store/slices/formSlice';
 import { validateFormSchema } from '../utils/schemaValidation';
 
 function ImportFormButton() {
   const dispatch = useAppDispatch();
+  const { message } = App.useApp();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {

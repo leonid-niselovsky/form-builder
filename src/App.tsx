@@ -69,7 +69,13 @@ function App() {
           }}
         >
           <Flex gap={24} align="flex-start" vertical={isCompact}>
-            <div style={{ flex: isCompact ? 'unset' : 1, width: isCompact ? '100%' : undefined, minWidth: 0 }}>
+            <div
+              style={{
+                flex: isCompact ? 'unset' : 1,
+                width: isCompact ? '100%' : undefined,
+                minWidth: 0,
+              }}
+            >
               <FormBuilder />
             </div>
             <div style={{ width: isCompact ? '100%' : 480, flexShrink: 0 }}>
