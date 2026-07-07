@@ -2,8 +2,9 @@ import { Button, Card, Flex, Form, Input, theme, Typography } from 'antd';
 import { useAppDispatch } from '../store/hooks';
 import { login } from '../store/slices/authSlice';
 import { storeUsername } from '../utils/authStorage';
+import ThemeToggle from './ThemeToggle';
 
-const { Title, Text } = Typography;
+const { Title } = Typography;
 const { useToken } = theme;
 
 interface LoginFormValues {
@@ -24,16 +25,21 @@ function LoginPage() {
     <Flex
       align="center"
       justify="center"
-      style={{ minHeight: '100vh', padding: 24, background: token.colorBgLayout }}
+      style={{
+        position: 'relative',
+        minHeight: '100vh',
+        padding: 24,
+        background: token.colorBgLayout,
+      }}
     >
+      <div style={{ position: 'absolute', top: 24, right: 24 }}>
+        <ThemeToggle />
+      </div>
+
       <Card style={{ width: 360 }}>
         <Title level={3} style={{ marginTop: 0 }}>
           Business Form Studio
         </Title>
-        <Text type="secondary">
-          Demo login — any username and password will work, this is a local, portfolio-only project
-          with no real backend.
-        </Text>
 
         <Form layout="vertical" onFinish={handleFinish} style={{ marginTop: 24 }}>
           <Form.Item

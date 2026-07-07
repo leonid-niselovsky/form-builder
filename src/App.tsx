@@ -55,7 +55,7 @@ function App() {
       <Layout style={{ flexDirection: isCompact ? 'column' : 'row' }}>
         <Sider
           width={isCompact ? '100%' : 240}
-          style={{ padding: 16, background: token.colorBgLayout }}
+          style={{ padding: 24, background: token.colorBgLayout }}
         >
           <FieldPalette />
         </Sider>

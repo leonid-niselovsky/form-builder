@@ -30,7 +30,15 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
       <ConfigProvider
         theme={{
           algorithm: mode === 'dark' ? antdTheme.darkAlgorithm : antdTheme.defaultAlgorithm,
-          token: mode === 'dark' ? { colorBgContainer: '#242424', colorBgElevated: '#2a2a2a' } : {},
+          token:
+            mode === 'dark'
+              ? {
+                  colorBgContainer: '#242424',
+                  colorBgElevated: '#2a2a2a',
+                  colorBorder: '#7c7366',
+                  colorBorderSecondary: '#7c7366',
+                }
+              : {},
         }}
       >
         {children}
