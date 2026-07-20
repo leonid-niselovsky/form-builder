@@ -36,7 +36,11 @@ function PreviewField({ field }: PreviewFieldProps) {
     case 'date':
       return (
         <Form.Item label={field.label} required={field.required} extra={field.helperText}>
-          <DatePicker style={{ width: '100%' }} placeholder={field.placeholder} />
+          <DatePicker
+            style={{ width: '100%' }}
+            placeholder={field.placeholder}
+            showTime={field.showTime}
+          />
         </Form.Item>
       );
 

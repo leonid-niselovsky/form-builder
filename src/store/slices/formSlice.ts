@@ -110,6 +110,13 @@ const formSlice = createSlice({
         field.max = action.payload.max;
       }
     },
+    toggleFieldShowTime: (state, action: PayloadAction<string>) => {
+      const field = findFieldById(state.fields, action.payload);
+
+      if (field) {
+        field.showTime = !field.showTime;
+      }
+    },
     removeField: (state, action: PayloadAction<string>) => {
       state.fields = state.fields.filter((el) => el.id !== action.payload);
     },
@@ -162,6 +169,7 @@ export const {
   updateFieldOptions,
   updateFieldMin,
   updateFieldMax,
+  toggleFieldShowTime,
   duplicateField,
   reorderFields,
   loadForm,

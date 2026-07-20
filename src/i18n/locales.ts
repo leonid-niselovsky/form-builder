@@ -40,6 +40,7 @@ const en = {
   'settings.min': 'Min',
   'settings.max': 'Max',
   'settings.helper': 'Helper text',
+  'settings.showTime': 'Enable time',
   'settings.required': 'Required',
 
   'save.button': 'Save',
@@ -125,6 +126,7 @@ const ru: Record<TranslationKey, string> = {
   'settings.min': 'Мин',
   'settings.max': 'Макс',
   'settings.helper': 'Вспомогательный текст',
+  'settings.showTime': 'Выбор времени',
   'settings.required': 'Обязательное',
 
   'save.button': 'Сохранить',
@@ -208,6 +210,7 @@ const kk: Record<TranslationKey, string> = {
   'settings.min': 'Мин',
   'settings.max': 'Макс',
   'settings.helper': 'Көмекші мәтін',
+  'settings.showTime': 'Уақытты таңдау',
   'settings.required': 'Міндетті',
 
   'save.button': 'Сақтау',

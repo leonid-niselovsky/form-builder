@@ -1,0 +1,65 @@
+{
+  "name": "Заявка на уборку помещения",
+  "fields": [
+    {
+      "id": "contact",
+      "type": "input",
+      "label": "Контактное лицо",
+      "placeholder": "Иван Иванов",
+      "required": true
+    },
+    {
+      "id": "phone",
+      "type": "input",
+      "label": "Телефон для связи",
+      "placeholder": "+7 900 000-00-00",
+      "required": true
+    },
+    {
+      "id": "room-type",
+      "type": "select",
+      "label": "Тип помещения",
+      "placeholder": "Выберите тип",
+      "required": true,
+      "options": ["Квартира", "Офис", "Загородный дом", "Торговое помещение"]
+    },
+    {
+      "id": "area",
+      "type": "number",
+      "label": "Площадь, м²",
+      "placeholder": "Например, 60",
+      "required": true,
+      "min": 1
+    },
+    {
+      "id": "cleaning-type",
+      "type": "select",
+      "label": "Тип уборки",
+      "placeholder": "Выберите услугу",
+      "required": true,
+      "options": ["Поддерживающая", "Генеральная", "После ремонта", "Мытьё окон"]
+    },
+    {
+      "id": "datetime",
+      "type": "date",
+      "label": "Желаемые дата и время",
+      "placeholder": "Выберите дату и время",
+      "required": true,
+      "showTime": true
+    },
+    {
+      "id": "comment",
+      "type": "textarea",
+      "label": "Комментарий к заявке",
+      "placeholder": "Особые пожелания к уборке…",
+      "required": false,
+      "helperText": "Например: есть домашние животные, нужна химчистка дивана"
+    },
+    {
+      "id": "consent",
+      "type": "checkbox",
+      "label": "Согласен на обработку персональных данных",
+      "required": true
+    }
+  ]
+}

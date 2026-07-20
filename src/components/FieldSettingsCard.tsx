@@ -18,6 +18,7 @@ import {
   duplicateField,
   removeField,
   toggleFieldRequired,
+  toggleFieldShowTime,
   updateFieldHelperText,
   updateFieldLabel,
   updateFieldMax,
@@ -161,6 +162,16 @@ function FieldSettingsCard({
             );
           }}
         />
+
+        {field.type === 'date' && (
+          <Flex align="center" gap={8}>
+            <Switch
+              checked={field.showTime ?? false}
+              onChange={() => dispatch(toggleFieldShowTime(field.id))}
+            />
+            <Text>{t('settings.showTime')}</Text>
+          </Flex>
+        )}
 
         <Flex align="center" gap={8}>
           <Switch

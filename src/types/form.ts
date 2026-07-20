@@ -10,6 +10,7 @@ export interface Field {
   options?: string[];
   min?: number;
   max?: number;
+  showTime?: boolean;
 }
 
 export interface FormTemplate {
