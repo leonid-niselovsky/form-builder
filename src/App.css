@@ -6,6 +6,45 @@
   text-overflow: clip;
 }
 
+.app-header--warm {
+  background: #2b2421;
+  border-bottom: 1px solid #5b4e46;
+  box-shadow: 0 10px 28px rgba(43, 36, 33, 0.18);
+}
+
+.app-header--warm .ant-typography {
+  color: #f8efe7;
+}
+
+.app-header--warm .ant-typography-edit {
+  color: rgba(248, 239, 231, 0.72);
+}
+
+.app-header--warm .ant-typography-edit:hover {
+  color: #ffffff;
+}
+
+.app-header--warm .ant-typography-edit-content textarea {
+  background: #fffaf4;
+  color: #2b2421;
+}
+
+.app-header--warm .ant-divider-vertical {
+  border-inline-start-color: rgba(248, 239, 231, 0.28);
+}
+
+.app-header--warm .ant-btn-text {
+  color: #f8efe7;
+}
+
+.app-header--warm .ant-btn-text:hover {
+  color: #ffffff;
+}
+
+.app-header--warm .ant-btn-text:active {
+  color: #ffffff;
+}
+
 /* Save button — matte warm green. antd uses :where() for its own rules, so a
    two-class selector wins without !important. */
 .btn-save.ant-btn-primary {

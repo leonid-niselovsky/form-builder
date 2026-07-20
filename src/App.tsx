@@ -14,6 +14,7 @@ import ThemeToggle from './components/ThemeToggle';
 import { useAppDispatch, useAppSelector } from './store/hooks';
 import { renameForm } from './store/slices/formSlice';
 import { useTranslation } from './i18n/localeContext';
+import { useThemeMode } from './theme/themeContext';
 
 const { Sider, Header, Content } = Layout;
 const { Title } = Typography;
@@ -27,6 +28,7 @@ function App() {
   const screens = useBreakpoint();
   const isCompact = !screens.lg;
   const { token } = useToken();
+  const { mode } = useThemeMode();
 
   const handleRename = (value: string) => {
     dispatch(renameForm(value.trim() || 'Untitled form'));
@@ -35,8 +37,9 @@ function App() {
   return (
     <Layout style={{ height: isCompact ? 'auto' : '100vh', minHeight: '100vh' }}>
       <Header
+        className={mode === 'light' ? 'app-header app-header--warm' : 'app-header'}
         style={{
-          background: token.colorBgContainer,
+          background: mode === 'dark' ? token.colorBgContainer : undefined,
           padding: '12px 24px',
           height: 'auto',
           display: 'flex',
