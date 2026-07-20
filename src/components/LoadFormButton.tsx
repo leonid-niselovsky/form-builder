@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { App, Button, Empty, Flex, Input, Modal, Space, theme, Typography } from 'antd';
+import { App, Button, Empty, Flex, Input, Modal, Space, Tooltip, theme, Typography } from 'antd';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { loadForm, renameForm, setFormId } from '../store/slices/formSlice';
 import {
@@ -8,6 +8,7 @@ import {
   listFormTemplates,
   renameFormTemplate,
 } from '../db/formTemplateService';
+import { useTranslation } from '../i18n/localeContext';
 import type { FormTemplate } from '../types/form';
 
 const { Text } = Typography;
@@ -18,6 +19,7 @@ function LoadFormButton() {
   const currentFormId = useAppSelector((state) => state.form.id);
   const { message } = App.useApp();
   const { token } = useToken();
+  const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [templates, setTemplates] = useState<FormTemplate[]>([]);
   const [renamingTemplate, setRenamingTemplate] = useState<FormTemplate | null>(null);
@@ -38,7 +40,7 @@ function LoadFormButton() {
   const handleLoad = (template: FormTemplate) => {
     dispatch(loadForm({ id: template.id, name: template.name, fields: template.fields }));
     setIsModalOpen(false);
-    message.success('Form loaded successfully.');
+    message.success(t('load.success'));
   };
 
   const handleRenameClick = (template: FormTemplate) => {
@@ -64,9 +66,10 @@ function LoadFormButton() {
 
   const handleDeleteClick = (template: FormTemplate) => {
     Modal.confirm({
-      title: 'Delete form',
-      content: `Delete "${template.name}"? This can't be undone.`,
-      okText: 'Delete',
+      title: t('load.deleteTitle'),
+      content: t('load.deleteContent', { name: template.name }),
+      okText: t('load.deleteOk'),
+      cancelText: t('common.cancel'),
       okButtonProps: { danger: true },
       onOk: async () => {
         await deleteFormTemplate(template.id);
@@ -76,23 +79,25 @@ function LoadFormButton() {
         }
 
         refreshTemplates();
-        message.success('Form deleted successfully.');
+        message.success(t('load.deleteSuccess'));
       },
     });
   };
 
   return (
     <>
-      <Button onClick={() => setIsModalOpen(true)}>Load Form</Button>
+      <Tooltip title={t('load.tooltip')}>
+        <Button onClick={() => setIsModalOpen(true)}>{t('load.button')}</Button>
+      </Tooltip>
 
       <Modal
-        title="Saved forms"
+        title={t('load.modalTitle')}
         open={isModalOpen}
         onCancel={() => setIsModalOpen(false)}
         footer={null}
       >
         {templates.length === 0 ? (
-          <Empty description="No saved forms yet." />
+          <Empty description={t('load.empty')} />
         ) : (
           <Space orientation="vertical" style={{ width: '100%' }} size={0}>
             {templates.map((template, index) => (
@@ -111,7 +116,9 @@ function LoadFormButton() {
                   <Text strong>{template.name}</Text>
                   <br />
                   <Text type="secondary">
-                    Updated {new Date(template.updatedAt).toLocaleString()}
+                    {t('load.updated', {
+                      date: new Date(template.updatedAt).toLocaleString(),
+                    })}
                   </Text>
                 </div>
 
@@ -128,7 +135,7 @@ function LoadFormButton() {
                     onClick={() => handleDeleteClick(template)}
                   />
                   <Button type="link" onClick={() => handleLoad(template)}>
-                    Load
+                    {t('load.loadLink')}
                   </Button>
                 </Space>
               </Flex>
@@ -138,14 +145,14 @@ function LoadFormButton() {
       </Modal>
 
       <Modal
-        title="Rename form"
+        title={t('load.renameTitle')}
         open={renamingTemplate !== null}
         onOk={handleConfirmRename}
         onCancel={() => setRenamingTemplate(null)}
-        okText="Rename"
+        okText={t('load.renameOk')}
       >
         <Input
-          placeholder="Form name"
+          placeholder={t('save.namePlaceholder')}
           value={renameValue}
           onChange={(e) => setRenameValue(e.target.value)}
           onPressEnter={handleConfirmRename}

@@ -9,6 +9,7 @@ import {
   Space,
   Switch,
   Tag,
+  theme,
   Tooltip,
   Typography,
 } from 'antd';
@@ -24,7 +25,9 @@ import {
   updateFieldOptions,
   updateFieldPlaceholder,
 } from '../store/slices/formSlice';
-import type { Field, FieldType } from '../types/form';
+import { useTranslation } from '../i18n/localeContext';
+import { fieldTypeLabelKeys } from '../i18n/fieldTypes';
+import type { Field } from '../types/form';
 
 const { TextArea } = Input;
 const { Text } = Typography;
@@ -35,25 +38,19 @@ interface FieldSettingsCardProps {
   dragHandleListeners?: DraggableSyntheticListeners;
 }
 
-const fieldTypeLabels: Record<FieldType, string> = {
-  input: 'Text Input',
-  textarea: 'Textarea',
-  select: 'Select',
-  checkbox: 'Checkbox',
-  date: 'Date Picker',
-  number: 'Number Input',
-};
-
 function FieldSettingsCard({
   field,
   dragHandleAttributes,
   dragHandleListeners,
 }: FieldSettingsCardProps) {
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
+  const { token } = theme.useToken();
 
   return (
     <Card
       size="small"
+      style={{ borderColor: token.colorBorder }}
       title={
         <Space size={8}>
           <span
@@ -63,19 +60,19 @@ function FieldSettingsCard({
           >
             <HolderOutlined />
           </span>
-          <Tag>{fieldTypeLabels[field.type]}</Tag>
+          <Tag>{t(fieldTypeLabelKeys[field.type])}</Tag>
         </Space>
       }
       extra={
         <Space size={4}>
-          <Tooltip title="Duplicate field">
+          <Tooltip title={t('settings.duplicate')}>
             <Button
               type="text"
               icon={<CopyOutlined />}
               onClick={() => dispatch(duplicateField(field.id))}
             />
           </Tooltip>
-          <Tooltip title="Remove field">
+          <Tooltip title={t('settings.remove')}>
             <Button
               danger
               type="text"
@@ -89,7 +86,7 @@ function FieldSettingsCard({
       <Space orientation="vertical" style={{ width: '100%' }}>
         <Input
           value={field.label}
-          placeholder="Field label"
+          placeholder={t('settings.label')}
           onChange={(e) => {
             dispatch(
               updateFieldLabel({
@@ -103,7 +100,7 @@ function FieldSettingsCard({
         {field.type !== 'checkbox' && (
           <Input
             value={field.placeholder}
-            placeholder="Field placeholder"
+            placeholder={t('settings.placeholder')}
             onChange={(e) => {
               dispatch(
                 updateFieldPlaceholder({
@@ -118,7 +115,7 @@ function FieldSettingsCard({
         {field.type === 'select' && (
           <TextArea
             value={(field.options ?? []).join('\n')}
-            placeholder={'One option per line, e.g.\nKazakhstan\nGermany\nCanada'}
+            placeholder={t('settings.options')}
             autoSize={{ minRows: 3 }}
             onChange={(e) => {
               dispatch(
@@ -136,7 +133,7 @@ function FieldSettingsCard({
             <InputNumber
               style={{ width: '100%' }}
               value={field.min}
-              placeholder="Min"
+              placeholder={t('settings.min')}
               onChange={(value) =>
                 dispatch(updateFieldMin({ id: field.id, min: value ?? undefined }))
               }
@@ -144,7 +141,7 @@ function FieldSettingsCard({
             <InputNumber
               style={{ width: '100%' }}
               value={field.max}
-              placeholder="Max"
+              placeholder={t('settings.max')}
               onChange={(value) =>
                 dispatch(updateFieldMax({ id: field.id, max: value ?? undefined }))
               }
@@ -154,7 +151,7 @@ function FieldSettingsCard({
 
         <Input
           value={field.helperText}
-          placeholder="Helper text"
+          placeholder={t('settings.helper')}
           onChange={(e) => {
             dispatch(
               updateFieldHelperText({
@@ -170,7 +167,7 @@ function FieldSettingsCard({
             checked={field.required}
             onChange={() => dispatch(toggleFieldRequired(field.id))}
           />
-          <Text>Required</Text>
+          <Text>{t('settings.required')}</Text>
         </Flex>
       </Space>
     </Card>

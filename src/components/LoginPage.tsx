@@ -1,8 +1,10 @@
-import { Button, Card, Flex, Form, Input, theme, Typography } from 'antd';
+import { Button, Card, Flex, Form, Input, Space, theme, Typography } from 'antd';
 import { useAppDispatch } from '../store/hooks';
 import { login } from '../store/slices/authSlice';
 import { storeUsername } from '../utils/authStorage';
+import { useTranslation } from '../i18n/localeContext';
 import ThemeToggle from './ThemeToggle';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const { Title } = Typography;
 const { useToken } = theme;
@@ -15,6 +17,7 @@ interface LoginFormValues {
 function LoginPage() {
   const dispatch = useAppDispatch();
   const { token } = useToken();
+  const { t } = useTranslation();
 
   const handleFinish = (values: LoginFormValues) => {
     storeUsername(values.username);
@@ -32,9 +35,10 @@ function LoginPage() {
         background: token.colorBgLayout,
       }}
     >
-      <div style={{ position: 'absolute', top: 24, right: 24 }}>
+      <Space style={{ position: 'absolute', top: 24, right: 24 }}>
+        <LanguageSwitcher />
         <ThemeToggle />
-      </div>
+      </Space>
 
       <Card style={{ width: 360 }}>
         <Title level={3} style={{ marginTop: 0 }}>
@@ -43,23 +47,23 @@ function LoginPage() {
 
         <Form layout="vertical" onFinish={handleFinish} style={{ marginTop: 24 }}>
           <Form.Item
-            label="Username"
+            label={t('login.username')}
             name="username"
-            rules={[{ required: true, message: 'Please enter a username' }]}
+            rules={[{ required: true, message: t('login.usernameRequired') }]}
           >
-            <Input placeholder="e.g. admin" autoFocus />
+            <Input placeholder={t('login.usernamePlaceholder')} autoFocus />
           </Form.Item>
 
           <Form.Item
-            label="Password"
+            label={t('login.password')}
             name="password"
-            rules={[{ required: true, message: 'Please enter a password' }]}
+            rules={[{ required: true, message: t('login.passwordRequired') }]}
           >
-            <Input.Password placeholder="Any password" />
+            <Input.Password placeholder={t('login.passwordPlaceholder')} />
           </Form.Item>
 
           <Button type="primary" htmlType="submit" block>
-            Log in
+            {t('login.submit')}
           </Button>
         </Form>
       </Card>

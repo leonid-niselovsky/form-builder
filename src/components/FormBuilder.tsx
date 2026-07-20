@@ -3,12 +3,14 @@ import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { Card, Empty, Space } from 'antd';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { reorderFields } from '../store/slices/formSlice';
+import { useTranslation } from '../i18n/localeContext';
 import SortableFieldCard from './SortableFieldCard';
 
 function FormBuilder() {
   const dispatch = useAppDispatch();
   const fields = useAppSelector((state) => state.form.fields);
   const sensors = useSensors(useSensor(PointerSensor));
+  const { t } = useTranslation();
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
@@ -19,9 +21,9 @@ function FormBuilder() {
   };
 
   return (
-    <Card title="Form Builder">
+    <Card title={t('builder.title')}>
       {fields.length === 0 ? (
-        <Empty description="No fields yet. Add your first field from the palette." />
+        <Empty description={t('builder.empty')} />
       ) : (
         <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
           <SortableContext

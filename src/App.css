@@ -1,0 +1,36 @@
+/* Allow card titles to wrap instead of being truncated with an ellipsis,
+   so longer translated labels (e.g. Kazakh) stay fully readable. */
+.ant-card-head-title {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+/* Save button — matte warm green. antd uses :where() for its own rules, so a
+   two-class selector wins without !important. */
+.btn-save.ant-btn-primary {
+  background: #6f9563;
+  border-color: #6f9563;
+}
+.btn-save.ant-btn-primary:hover {
+  background: #7da571;
+  border-color: #7da571;
+}
+.btn-save.ant-btn-primary:active {
+  background: #5f8353;
+  border-color: #5f8353;
+}
+
+/* Reset button — default (outlined) button with a matte warm red border/text. */
+.btn-reset.ant-btn {
+  color: #c15f52;
+  border-color: #c15f52;
+}
+.btn-reset.ant-btn:hover {
+  color: #cd6d5f;
+  border-color: #cd6d5f;
+}
+.btn-reset.ant-btn:active {
+  color: #a94e43;
+  border-color: #a94e43;
+}

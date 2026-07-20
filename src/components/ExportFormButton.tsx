@@ -1,5 +1,6 @@
-import { Button } from 'antd';
+import { Button, Tooltip } from 'antd';
 import { useAppSelector } from '../store/hooks';
+import { useTranslation } from '../i18n/localeContext';
 
 function slugify(value: string): string {
   return (
@@ -13,6 +14,7 @@ function slugify(value: string): string {
 
 function ExportFormButton() {
   const { name, fields } = useAppSelector((state) => state.form);
+  const { t } = useTranslation();
 
   const handleExport = () => {
     const schema = {
@@ -31,7 +33,11 @@ function ExportFormButton() {
     URL.revokeObjectURL(url);
   };
 
-  return <Button onClick={handleExport}>Export Schema</Button>;
+  return (
+    <Tooltip title={t('export.tooltip')}>
+      <Button onClick={handleExport}>{t('export.button')}</Button>
+    </Tooltip>
+  );
 }
 
 export default ExportFormButton;

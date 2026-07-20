@@ -6,15 +6,18 @@ import { Provider } from 'react-redux';
 import { store } from './store/store';
 import AuthGate from './components/AuthGate';
 import { ThemeProvider } from './theme/ThemeProvider';
+import { LocaleProvider } from './i18n/LocaleProvider';
 
 createRoot(document.getElementById('root')!).render(
   <Provider store={store}>
-    <ThemeProvider>
-      <AntApp>
-        <AuthGate>
-          <App />
-        </AuthGate>
-      </AntApp>
-    </ThemeProvider>
+    <LocaleProvider>
+      <ThemeProvider>
+        <AntApp>
+          <AuthGate>
+            <App />
+          </AuthGate>
+        </AntApp>
+      </ThemeProvider>
+    </LocaleProvider>
   </Provider>
 );
